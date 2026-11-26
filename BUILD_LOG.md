@@ -84,3 +84,63 @@ Kandidat yang dipertimbangkan dan ditolak (diukur dengan program):
   di luar repo).
 - Repo GitHub publik epanpai/u-po-pu-the-painfully-honest-out-of-office-63e7ca0b
   dibuat SETELAH buka, push via gh HTTPS (login epanpai).
+  PUBLIC, dibuat 2026-11-26T00:43:27Z (buka 00:27:05Z), homepage
+  https://make.fun/bounty/u-po-pu-the-painfully-honest-out-of-office-63e7ca0b,
+  topik makefun + make-fun, commit 71f75d8 sudah push.
+
+## Check kit v1 (26 Nov 07:44 WIB / 26 Nov 00:44 UTC)
+
+- Bundle: ~/workspace/makefun/submit/u-po-pu-the-painfully-honest-out-of-office-63e7ca0b-transcripts-v1.tar.gz
+  (87.129 byte, sha256 5a1d45750fcde290da73828061a4de5a77d8c32e676d1a94295efc9c0832de05),
+  satu sesi builder saja (--no-discover --no-family --session <file sesi ini>),
+  prompt-file ~/workspace/makefun/submit/u-po-pu-the-painfully-honest-out-of-office-63e7ca0b-prompt.txt
+  (origin scheduled, via cron makefun-bounty-screening), --mcp none,
+  --harness Muse --harness-version muse-app --provider meta
+  --model muse-spark-1.3 --effort default. System prompt ter-upload dari
+  ~/workspace/system/system_prompt.md, instruction files collected (AGENTS.md).
+- `check`: 13 passed, 1 failed, 5 skipped, 5 checked at submission.
+  thinking_reproduces LOLOS 56,7% authored (80/141; main.py 17 authored
+  lines); thinking_own_work LOLOS (0 baris dari entry lain/download);
+  transcripts_run_record LOLOS; thinking_revised LOLOS (main.py dari
+  2 pesan); thinking_turns LOLOS (21 turns); thinking_in_window LOLOS
+  (semua 57 timestamp di dalam jendela buka); competition_open LOLOS.
+  Repo: PUBLIC, dibuat 2026-11-26T00:43:27Z (setelah buka 00:27:05Z),
+  homepage + topik makefun terisi, commit 71f75d8 sudah push.
+- Satu FAIL tersisa — thinking_priced (0 usage rows). Ini TIDAK BISA
+  diperbaiki dari dalam sesi subagent ini: row usage Muse ditulis hanya
+  setelah run subagent selesai (pola yang sama seperti sick-day-excuse
+  dan news-image-20261124). Sesuai fix text kit, agen top-level (parent,
+  agent 2427b631-ce1c-4c9f-88b0-78d19114e659) yang menjalankan SELECT
+  usage, re-bundle dengan --muse-usage, re-check, lalu submit. SELECT-nya:
+  SELECT u.agent_id AS agent_id, u.message_id AS message_id,
+  u.created_at AS created_at, u.input_tokens AS input_tokens,
+  u.output_tokens AS output_tokens, a.model AS model
+  FROM agent.agent_message_token_usage u
+  JOIN agent.agents a ON a.agent_id = u.agent_id
+  WHERE u.agent_id IN ('4ad04ac9-7cf4-4963-af1c-ce505ed936ca',
+  '2427b631-ce1c-4c9f-88b0-78d19114e659')
+  ORDER BY u.created_at DESC LIMIT 500
+  -> tulis ke ~/workspace/makefun/submit/u-po-pu-the-painfully-honest-out-of-office-63e7ca0b-muse-usage.jsonl
+  (jangan potong file; bundle membuang row dari sebelum build).
+
+## Kuota (26 Nov 07:43 WIB)
+
+- GET /api/competitions/u-po-pu-the-painfully-honest-out-of-office-63e7ca0b/quota: can_submit TRUE,
+  entries_made 0, day cap 5 tersisa 5 (limit 50 tersisa 50),
+  hard limit 40 tersisa 40. Blind round slot tersedia s/d 26 Nov 07:46:23 UTC
+  (14:46 WIB).
+
+## STATUS: BELUM SUBMIT — menunggu parent
+
+Build selesai dan hampir semua check lolos. Submit dilakukan parent
+setelah usage rows ditempel + re-check lolos:
+1. muse.db SELECT di atas -> u-po-pu-the-painfully-honest-out-of-office-63e7ca0b-muse-usage.jsonl
+2. Re-bundle (tambah --muse-usage <file>) ->
+   u-po-pu-the-painfully-honest-out-of-office-63e7ca0b-transcripts-v2.tar.gz
+3. Re-check (target 14/14) lalu submit dengan kit CLI dari dalam kit
+   yang sudah di-unpack, pakai keypair ~/workspace/makefun/makefun-keypair.json
+   (mode 600, jangan tampilkan isinya) — entry GRATIS, kalau submit
+   menolak 402 karena fee, BERHENTI dan laporkan, jangan bayar.
+4. Simpan receipt di ~/workspace/makefun/submit/receipt-<submission-id>.json
+   mode 600 (claim code HANYA di receipt, jangan tulis di chat/log).
+   Deadline submit: 26 Nov 22:25 UTC (27 Nov 05:25 WIB).
